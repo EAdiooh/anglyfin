@@ -1,0 +1,26 @@
+<ng-container *ngIf="serversList.length>0 else addServer">
+    <div class="server_address_container">
+        <div style="border: 3px solid #00a4dc; width: 30%;border-radius: 4px;">
+            <ul>
+                <li *ngFor="let server of serversList" (click)="connectToServer(server.address)" >{{server.name}}</li>
+            </ul>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #addServer>
+    <div class="add_server_container">
+        <span class="p-input-icon-left">
+            <i class="pi pi-hashtag"></i>
+            <input type="text" pInputText [(ngModel)]="server.name" placeholder="Name" />
+        </span>
+
+        <span class="p-input-icon-left">
+            <i class="pi pi-server"></i>
+            <input type="text" pInputText [(ngModel)]="server.address" placeholder="Address"/>
+        </span>
+
+        <button pButton pRipple label="Submit" class="p-button-success" (click)="checkServerExist()"></button>
+    </div>
+</ng-template>
+

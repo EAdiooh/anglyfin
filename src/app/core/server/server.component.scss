@@ -1,0 +1,39 @@
+.add_server_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 15px;
+}
+
+.server_address_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.server_address_container ul{
+    font-size: 24px;
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    cursor: pointer;
+    padding: 0;
+}
+.server_address_container li:last-child{
+    border-bottom: none;
+}
+
+
+.server_address_container li{
+    padding: 20px;
+    user-select: none;
+    border-bottom: 2px solid white;
+}
+.server_address_container li:hover{
+    background-color: #00a4dc;
+    color: white;
+}
+

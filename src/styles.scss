@@ -1,6 +1,15 @@
-@import 'assets/themes/theme.css';
 @import "primeng/resources/primeng.css";
+@import 'assets/themes/theme.css';
+@import "primeicons/primeicons.css";
+
+$prim-color: #00a4dc;
 
 body {
     font-family: var(--font-family);
+    margin: 0;
+    color: #9E9E9E;
+}
+
+.p-button{
+    font-weight: 700;
 }

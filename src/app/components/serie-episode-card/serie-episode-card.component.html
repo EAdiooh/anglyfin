@@ -1,0 +1,9 @@
+<div class="episode">
+    <div class="image-div" (click)="play()">
+        <img height="191" width="340" [src]="img_url" [alt]="episode.name" />
+    </div>
+    <div>
+        <h2> {{episode.seriesName}}</h2>
+        <h3> {{'S'+ episode.indexNumber+':E'+ episode.indexNumber + ' ' + episode.name }}</h3>
+    </div>
+</div>

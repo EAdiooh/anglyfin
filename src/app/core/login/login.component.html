@@ -1,0 +1,13 @@
+<div class="input_container">
+    <span class="p-input-icon-left">
+        <i class="pi pi-user"></i>
+        <input type="text" pInputText style="width: 20vw;" [(ngModel)]="user.username" (keyup.enter)="login()" placeholder="Username" />
+    </span>
+
+    <span class="p-input-icon-left">
+        <i class="pi pi-lock"></i>
+        <input type="password" pInputText style="width: 20vw;" [(ngModel)]="user.password" (keyup.enter)="login()" placeholder="Password"/>
+    </span>
+
+    <button pButton pRipple label="Login" class="p-button-success" style="width: 20vw;" (click)="login()"></button>
+</div>
