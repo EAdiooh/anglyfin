@@ -6,7 +6,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { JellyfinAPIService } from 'src/app/services/jellyfin-api.service';
-
+import { Media } from 'src/app/classes/media.class';
+import { PlayerService } from 'src/app/services/player.service';
+import { getMediaInfoApi } from '@jellyfin/sdk/lib/utils/api/media-info-api';
 
 @Component({
   selector: 'app-player',
@@ -16,9 +18,10 @@ import { JellyfinAPIService } from 'src/app/services/jellyfin-api.service';
 export class PlayerComponent {
 
   private mediaId!: string;
+  private media!: Media;
  
-  constructor(public jellyfinService: JellyfinService, private router: Router, private route: ActivatedRoute, public jellyfinApi: JellyfinAPIService) { 
-    this.mediaId = this.route.snapshot.paramMap.get('id') ?? '';
+  constructor(public jellyfinService: JellyfinService, private router: Router, private route: ActivatedRoute, public playerService: PlayerService) { 
+    //this.mediaId = this.route.snapshot.paramMap.get('id') ?? '';
   }
 
   ngOnInit() {
@@ -26,6 +29,6 @@ export class PlayerComponent {
   }
 
   public play(){
-    
+   
   }
 }

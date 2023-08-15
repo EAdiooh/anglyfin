@@ -6,6 +6,7 @@ import { JellyfinService } from 'src/app/services/jellyfin.service';
 import {
   ImageType
 } from '@jellyfin/sdk/lib/generated-client';
+import { PlayerService } from 'src/app/services/player.service';
 @Component({
   selector: 'app-serie-episode-card',
   templateUrl: './serie-episode-card.component.html',
@@ -15,7 +16,7 @@ export class SerieEpisodeCardComponent {
   @Input() episode!: SerieEpisode;
   public img_url: string = '';
 
-  constructor(public jellyfinService: JellyfinService, private router: Router, public jellyfinApi: JellyfinAPIService) { 
+  constructor(public jellyfinService: JellyfinService, private router: Router, public jellyfinApi: JellyfinAPIService, private playService: PlayerService) { 
     
   }
 
@@ -24,6 +25,7 @@ export class SerieEpisodeCardComponent {
   }
 
   public play(){
-    this.router.navigate(['play', { media: this.episode }]);
+    this.playService.play(this.episode);
+    //this.router.navigate(['play', { media: this.episode }]);
   }
 }

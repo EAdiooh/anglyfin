@@ -37,6 +37,18 @@ export class JellyfinAPIService {
     constructor(private messageService: MessageService,) {
     }
 
+    getJellyfin(){
+        return this.jellyfin;
+    }
+
+    getUser(){
+        return this.user;
+    }
+
+    getApi(){
+        return this.api;
+    }
+
     public connectToServer(address: string): Promise<boolean>{
         return new Promise(async (resolve, reject) => {
             try {
@@ -101,22 +113,5 @@ export class JellyfinAPIService {
         return '';
     }
 
-    public getItemPlaybackUrl (media: Media): string{
-        if (  this.user.currentUserToken ) {
-          let directOptions: Record<string, string> = {
-            Static: String(true),
-            mediaSourceId: media.id,
-            deviceId: this.jellyfin.deviceInfo.id,
-            api_key: this.user.currentUserToken
-          };
     
-          const parameters = new URLSearchParams(directOptions).toString();
-          return `${this.api.basePath}/Video/${media.id}/stream.${media.container}?${parameters}`;
-        }else{
-            return '';
-        }
-        // } else if (media.supportsTranscoding && media.transcodingUrl) {
-        //   return remote.sdk.api?.basePath + mediaSource.TranscodingUrl;
-        // }
-      };
 }

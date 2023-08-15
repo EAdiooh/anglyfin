@@ -12,6 +12,7 @@
   
         <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
   
+        <vg-track-selector></vg-track-selector>
         <vg-mute></vg-mute>
         <vg-volume></vg-volume>
   
@@ -19,6 +20,8 @@
     </vg-controls>
   
     <video #media [vgMedia]="$any(media)" id="singleVideo" preload="auto" crossorigin>
-        <source [src]="'http://192.168.1.62:8096/Videos/d042d6cd54b9e03f9c5ad71dcebffddb/stream.mkv'">
+        <source [src]="playerService.getItemPlaybackUrl()">
+        <track kind="subtitles" label="English"  srclang="en" default>
+
     </video>
  </vg-player>
