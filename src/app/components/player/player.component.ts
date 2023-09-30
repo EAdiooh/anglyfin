@@ -17,18 +17,16 @@ import { getMediaInfoApi } from '@jellyfin/sdk/lib/utils/api/media-info-api';
 })
 export class PlayerComponent {
 
-  private mediaId!: string;
-  private media!: Media;
+  public playbackURL:string = '';
  
   constructor(public jellyfinService: JellyfinService, private router: Router, private route: ActivatedRoute, public playerService: PlayerService) { 
-    //this.mediaId = this.route.snapshot.paramMap.get('id') ?? '';
   }
 
   ngOnInit() {
     this.play();
   }
 
-  public play(){
-   
+  public async play(){
+    this.playbackURL = await this.playerService.getItemPlaybackUrl();
   }
 }

@@ -24,8 +24,7 @@ export class SerieEpisodeCardComponent {
     this.img_url = this.jellyfinApi.getImage(this.episode.seriesId, ImageType.Backdrop)
   }
 
-  public play(){
+  public async play(){
     this.playService.play(this.episode);
-    //this.router.navigate(['play', { media: this.episode }]);
   }
 }
