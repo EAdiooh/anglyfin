@@ -32,7 +32,7 @@ export class JellyfinAPIService {
 
     private api!: Api;
     private user: any;
-    public toFollow: SerieEpisode[] = [];
+    public toFollow: WritableSignal<SerieEpisode[]> = signal<SerieEpisode[]>([]);
 
     constructor(private messageService: MessageService,) {
     }
@@ -91,13 +91,14 @@ export class JellyfinAPIService {
     public getToFollow(): Promise<boolean>{
         return new Promise(async (resolve, reject) => {
             try {
-                let result = await getTvShowsApi(this.api).getNextUp({userId: this.user.User.Id});
-                if(result.data.Items){
-                    result.data.Items.forEach((item: any) => {
-                        this.toFollow.push(new SerieEpisode(item));
-                    });
-                }
-                resolve(true);
+              let result = await getTvShowsApi(this.api).getNextUp({userId: this.user.User.Id});
+              if(result.data.Items){
+                this.toFollow.set([]);
+                result.data.Items.forEach((item: any) => {
+                  this.toFollow.mutate(values => values.push( new SerieEpisode(item)))
+                });
+              }
+              resolve(true);
             } catch (error: any) {
                 this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message });
                 reject(error);
