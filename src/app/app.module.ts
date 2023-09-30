@@ -14,7 +14,6 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
-import { CarouselModule } from 'primeng/carousel';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { LoginComponent } from './core/login/login.component';
 import { HomeComponent } from './core/home/home.component';
@@ -47,7 +46,6 @@ import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
     ToastModule,
     ButtonModule,
     InputMaskModule,
-    CarouselModule,
     ProgressBarModule,
     VgCoreModule,
     VgControlsModule,

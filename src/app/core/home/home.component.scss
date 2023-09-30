@@ -1,3 +1,13 @@
 .carousel-section{
     margin-top: 25px;
 }
+
+ul{
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+}
+
+li{
+    list-style-type: none;
+}

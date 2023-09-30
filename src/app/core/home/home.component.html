@@ -1,4 +1,4 @@
-<div class="carousel-section" *ngIf="jellyfinService.conitnue.length>0">
+<!-- <div class="carousel-section" *ngIf="jellyfinService.conitnue.length>0">
     <h1>Pick up where you left off:</h1>
     <p-carousel [value]="jellyfinService.conitnue" [numVisible]="5" [numScroll]="3" [circular]="true" >
         <ng-template let-media pTemplate="item">
@@ -10,13 +10,17 @@
            </ng-template>
         </ng-template>
     </p-carousel>
-</div>
+</div> -->
 
-<div class="carousel-section" *ngIf="JellyfinApi.toFollow.length>0">
-    <h1>Continue your show:</h1>
-    <p-carousel [value]="JellyfinApi.toFollow" [numVisible]="5" [numScroll]="3" [circular]="true" >
-        <ng-template let-serieEpisode pTemplate="item">
-            <app-serie-episode-card [episode]="serieEpisode"></app-serie-episode-card>
-        </ng-template>
-    </p-carousel>
-</div>
+<ng-container *ngIf="JellyfinApi.toFollow().length>0">
+    <div class="carousel-section" >
+        <h1>Continue your show:</h1>
+
+        <ul class="scrollMenu" >
+            <li *ngFor="let serieEpisode of JellyfinApi.toFollow()">
+                <app-serie-episode-card [episode]="serieEpisode"></app-serie-episode-card>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+

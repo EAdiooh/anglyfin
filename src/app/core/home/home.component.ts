@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { JellyfinAPIService } from 'src/app/services/jellyfin-api.service';
-import { JellyfinService } from 'src/app/services/jellyfin.service';
 
 @Component({
   selector: 'app-home',
@@ -27,12 +26,10 @@ export class HomeComponent implements OnInit{
     }
   ];
 
-  constructor(public jellyfinService: JellyfinService, public JellyfinApi: JellyfinAPIService ) { 
+  constructor(public JellyfinApi: JellyfinAPIService ) { 
   }
 
   async ngOnInit() {
-    // this.jellyfinService.getToFollow().subscribe();
-    // this.jellyfinService.retakeViewing().subscribe();
     await this.JellyfinApi.getToFollow();
   }
 
