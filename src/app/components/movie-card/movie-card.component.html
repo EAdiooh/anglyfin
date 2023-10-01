@@ -1,6 +1,6 @@
 <div class="movie">
     <div class="image-div" (click)="play()">
-        <img height="191" width="340" [src]="movie.getImage(jellyfinService.getServerAddress(), movie.id)" [alt]="movie.name" />
+        <img height="191" width="340" [src]="img_url" [alt]="movie.name" />
         
         <ng-container *ngIf="movie.userData.PlaybackPositionTicks > 0">
             <p-progressBar class="customProgress" [value]="movie.userData.PlayedPercentage" [style]="{ 'height': '6px', 'border-radius': '0px', 'margin-top': '0px', }"></p-progressBar>

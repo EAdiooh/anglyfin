@@ -8,7 +8,7 @@ import { getUserViewsApi } from '@jellyfin/sdk/lib/utils/api/user-views-api';
 import { getItemsApi } from '@jellyfin/sdk/lib/utils/api/items-api';
 import { getTvShowsApi } from '@jellyfin/sdk/lib/utils/api/tv-shows-api';
 import { getUserLibraryApi } from '@jellyfin/sdk/lib/utils/api/user-library-api';
-import { Media, SerieEpisode } from '../classes/media.class';
+import { Media, Movie, SerieEpisode } from '../classes/media.class';
 import { Observable } from 'rxjs';
 import { ImageType } from '@jellyfin/sdk/lib/generated-client/models';
 
@@ -33,6 +33,7 @@ export class JellyfinAPIService {
     private api!: Api;
     private user: any;
     public toFollow: WritableSignal<SerieEpisode[]> = signal<SerieEpisode[]>([]);
+    public resume: WritableSignal<Media[]> = signal<Media[]>([]);
     
     private profileRequestBody = {
         "DeviceProfile": {
@@ -317,6 +318,7 @@ export class JellyfinAPIService {
                 let auth = await this.api.authenticateUserByName(username, password);
                 this.user = auth.data
                 this.getToFollow();
+                this.getResume();
                 resolve(true);
             } catch (error: any) {
                 this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message });
@@ -354,6 +356,28 @@ export class JellyfinAPIService {
             }
         });
     }
+
+    public getResume(): Promise<boolean>{
+      return new Promise(async (resolve, reject) => {
+          try {
+            let result = await getItemsApi(this.api).getResumeItems({userId: this.user.User.Id});
+            if(result.data.Items){
+              this.resume.set([]);
+              result.data.Items.forEach((item: any) => {
+                if(item.Type === "Movie"){ 
+                  this.resume.mutate(values => values.push( new Movie(item)))
+                }else if(item.Type === "Episode"){
+                  this.resume.mutate(values => values.push( new SerieEpisode(item)))
+                }
+              });
+            }
+            resolve(true);
+          } catch (error: any) {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message });
+              reject(error);
+          }
+      });
+  }
 
     public getImage(itemId: string, imgType: ImageType | undefined): string{
         let url = this.api.getItemImageUrl(itemId, imgType);

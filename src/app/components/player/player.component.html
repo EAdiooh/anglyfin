@@ -3,7 +3,7 @@
     <div style="width: 100vw; height: 100vh;">
 
   
-    <vg-player>
+    <vg-player (onPlayerReady)="onPlayerReady($event)">
         <vg-controls >
             <vg-play-pause></vg-play-pause>
             <vg-playback-button></vg-playback-button>

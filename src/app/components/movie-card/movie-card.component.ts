@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/classes/media.class';
-import { JellyfinService } from 'src/app/services/jellyfin.service';
-
+import { JellyfinAPIService } from 'src/app/services/jellyfin-api.service';
+import {
+  ImageType
+} from '@jellyfin/sdk/lib/generated-client';
+import { PlayerService } from 'src/app/services/player.service';
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -10,12 +13,17 @@ import { JellyfinService } from 'src/app/services/jellyfin.service';
 })
 export class MovieCardComponent {
   @Input() movie!: Movie;
+  public img_url: string = '';
 
-  constructor(public jellyfinService: JellyfinService, private router: Router) { 
+  constructor (public jellyfinApi: JellyfinAPIService, private router: Router, private playerService: PlayerService) { 
+  }
+
+  ngOnInit() {
+    this.img_url = this.jellyfinApi.getImage(this.movie.id, ImageType.Backdrop)
   }
 
   public play(){
-    this.router.navigate(['play', { id: this.movie.id }]);
+    this.playerService.play(this.movie);
   }
 
   

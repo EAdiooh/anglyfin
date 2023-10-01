@@ -1,6 +1,10 @@
 <div class="episode">
     <div class="image-div" (click)="play()">
         <img height="191" width="340" [src]="img_url" [alt]="episode.name" />
+
+        <ng-container *ngIf="episode.userData.PlaybackPositionTicks > 0">
+            <p-progressBar class="customProgress" [value]="episode.userData.PlayedPercentage" [style]="{ 'height': '6px', 'border-radius': '0px', 'margin-top': '0px', }"></p-progressBar>
+        </ng-container>
     </div>
     <div>
         <h2> {{episode.seriesName}}</h2>

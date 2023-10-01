@@ -28,7 +28,7 @@ import {
 })
 export class PlayerService {
 
-    private playingMedia!: Media;
+    public playingMedia!: Media;
 
     private profileRequestBody = {
       "DeviceProfile": {
@@ -341,6 +341,10 @@ export class PlayerService {
     public getplayMediaInfo(id: string){
       let headers = new HttpHeaders().set('X-Emby-Authorization', `Emby UserId="${this.jellyfinApi.getUser().User.Name}", Client="media_cleaner", Device="media_cleaner", DeviceId="media_cleaner", Version="0.2", Token="${this.jellyfinApi.getUser().AccessToken}"`);
       let params = new HttpParams().set('UserId', this.jellyfinApi.getUser().User.Id);
+
+      // if(this.playingMedia.runTimeTicks > 0){
+      //   params = params.append('StartTimeTicks', this.playingMedia.runTimeTicks);
+      // }
       
       return this.http.post<any>(`${this.jellyfinApi.getApi().basePath}/Items/${id}/PlaybackInfo`, this.profileRequestBody ,{headers: headers, params: params})
       .pipe(
